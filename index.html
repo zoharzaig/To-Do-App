@@ -1,0 +1,35 @@
+<html ng-app="ToDoApp">
+    <head>
+        <title>To Do App</title>
+        <script src="angular.js"></script>
+        <script src="app.js"></script>
+    </head>
+
+    <body>
+        <h1>To Do List</h1>
+        <div ng-controller="Ctrl as ctrl">
+            <p>Add a to do:</p>
+            <input type="text" ng-model="ctrl.todoInput"></input>
+            <button ng-click="ctrl.addToDo()">Add a todo</button>
+
+            <div>
+
+                <p>Your ToDos:</p>
+                <button ng-click="ctrl.changeMode()">{{ctrl.editButtonText}}</button>
+                <ol>
+                    <!-- track the todos by index, as it's a unique propery for each element. 
+                    The elements on the other hand, are not unique as they may be repeated. 
+                    This allows us the user to enter the same todo twice.  -->
+                    <li ng-repeat="toDo in ctrl.todosArray track by $index" >
+                        <span ng-bind="toDo" ng-hide="ctrl.editMode"></span> 
+                        <input type="text" ng-model="toDo" ng-show="ctrl.editMode"></input>
+                        <button ng-click="ctrl.delete($index)" ng-hide="ctrl.editMode">Delete</button> 
+                    </li>
+                </ol>
+            </div>
+
+
+        </div>
+
+    </body>
+</html>
